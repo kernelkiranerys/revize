@@ -1,0 +1,21 @@
+You are extending the revize spaced-revision question bank.
+
+Book file: {PATH}
+Topic (taken from the folder the book was dropped in — use EXACTLY this string as the `topic` field for every question): {TOPIC}
+{HANDBOOK_NOTE}
+
+Working directory: ~ (the revize project is at .). Do ALL of the following end-to-end, autonomously. Do NOT ask questions, do NOT wait for input, do NOT stop until step 5. Then reply with the one-line summary.
+
+1. CONVERT. Run:
+     bash ./convert-book.sh "{PATH}"
+   It writes the markdown to ./data/<stem>.md and prints the output path. The basename of that .md is the `source_file` for everything below.
+
+2. CHUNK + EMBED. Run:
+     ./.venv/bin/python -m src.chunker
+   (idempotent — skips already-embedded sources.) Note how many chunks the new book added.
+
+{AUTHOR_BLOCK}
+
+5. REPLY. One single line: book title · chunks added · questions inserted · topic: {TOPIC}.
+
+Constraints: do NOT modify any existing questions. Do NOT touch the running QuizBot daemon. Use the venv python (./.venv/bin/python) for any `src.*` import. Do NOT re-run seeds/seed_questions.py — use src.ingest only. If a step fails, retry it once; if it still fails, reply "FAILED at step N: <reason>".
